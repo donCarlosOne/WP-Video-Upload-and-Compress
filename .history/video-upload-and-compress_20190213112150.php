@@ -122,15 +122,15 @@ add_action("init", "wp_vuc_shortcode_init");
 register_activation_hook(__FILE__, 'wp_vuc_activate');
 
 function wp_vuc_activate() {
-	wp_register_script("wp_vuc", sprintf("%s/js/wp_vuc.js", MYPLUGIN_PLUGIN_URL), ["jquery", "lodash"], wp_get_theme()->get("Version"), true);
-	wp_enqueue_script("lodash");
-	wp_enqueue_script("wp_vuc");
+	wp_register_script("constants", sprintf("%s/js/constants.js", MYPLUGIN_PLUGIN_URL), [], wp_get_theme()->get("Version"), true);
+	wp_register_script("utilities", sprintf("%s/js/utilities.js", MYPLUGIN_PLUGIN_URL), ["jquery", "constants", "lodash"], wp_get_theme()->get("Version"), true);
+	wp_register_script("wp_vuc", sprintf("%s/js/xBlackPorn.js", MYPLUGIN_PLUGIN_URL), ["utilities"], wp_get_theme()->get("Version"), true);
 
 	if (!wp_next_scheduled('wp_vuc_event')) {
 		wp_schedule_event(time(), 'hourly', 'wp_vuc_event');
-		Log::out("wp_vuc::wp_vuc_activate", "wp_vuc_event added to cron schedule");
+		Log::out("wp_vuc::wp_vuc_activate", "handle_videos_event added to cron schedule");
 	} else {
-		Log::out("wp_vuc::wp_vuc_activate", "wp_vuc_event already in cron schedule");
+		Log::out("wp_vuc::wp_vuc_activate", "handle_videos_event already in cron schedule");
 	}
 }
 

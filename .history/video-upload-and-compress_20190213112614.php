@@ -128,9 +128,9 @@ function wp_vuc_activate() {
 
 	if (!wp_next_scheduled('wp_vuc_event')) {
 		wp_schedule_event(time(), 'hourly', 'wp_vuc_event');
-		Log::out("wp_vuc::wp_vuc_activate", "wp_vuc_event added to cron schedule");
+		Log::out("wp_vuc::wp_vuc_activate", "handle_videos_event added to cron schedule");
 	} else {
-		Log::out("wp_vuc::wp_vuc_activate", "wp_vuc_event already in cron schedule");
+		Log::out("wp_vuc::wp_vuc_activate", "handle_videos_event already in cron schedule");
 	}
 }
 
